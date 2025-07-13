@@ -73,7 +73,7 @@ public class TaskSolutions {
     // Task 10: GCD (Наибольший общий делитель)
     public static int gcd(int a, int b) {
         if (b == 0) return a; // базовый случай
-        return gcd(b, a % b); // Евклидов алгоритм
+        return gcd(b, a % b); // Евклидов алгоритмf
     }
 
     // Точка входа в программу
