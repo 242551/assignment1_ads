@@ -35,46 +35,53 @@ public class TaskSolutions {
     public static long factorial(int n) {
         if (n <= 1) return 1; // базовый случай
         return n * factorial(n - 1); // рекурсивный вызов
-    }
+    } // Time Complexity: O(n)
+
 
     // Task 5: Fibonacci
     public static int fibonacci(int n) {
         if (n == 0) return 0; // базовый случай
         if (n == 1) return 1; // базовый случай
         return fibonacci(n - 1) + fibonacci(n - 2); // рекурсия
-    }
+    } // Time Complexity: O(2^n)
+
 
     // Task 6: Power a^n
     public static long power(int a, int n) {
         if (n == 0) return 1; // любое число в степени 0 = 1
         return a * power(a, n - 1); // рекурсивное умножение
-    }
+    } // Time Complexity: O(n)
+
 
     // Task 7: Reverse array
     public static void printReverse(int[] arr, int index) {
         if (index < 0) return; // базовый случай
         System.out.print(arr[index] + " ");
         printReverse(arr, index - 1); // двигаемся назад по массиву
-    }
+    } // Time Complexity: O(n)
+
 
     // Task 8: Check if all characters are digits
     public static boolean isAllDigits(String s, int index) {
         if (index == s.length()) return true; // дошли до конца — все цифры
         if (!Character.isDigit(s.charAt(index))) return false; // если хотя бы 1 не цифра
         return isAllDigits(s, index + 1); // проверяем следующий символ
-    }
+    } // Time Complexity: O(n)
+
 
     // Task 9: Binomial coefficient C(n, k)
     public static int binomialCoeff(int n, int k) {
         if (k == 0 || k == n) return 1; // базовые случаи
         return binomialCoeff(n - 1, k - 1) + binomialCoeff(n - 1, k); // рекурсивная формула
-    }
+    } // Time Complexity: O(2^n)
+
 
     // Task 10: GCD (Наибольший общий делитель)
     public static int gcd(int a, int b) {
         if (b == 0) return a; // базовый случай
-        return gcd(b, a % b); // Евклидов алгоритмf
-    }
+        return gcd(b, a % b); // Евклидов алгоритм
+    } // Time Complexity: O(log(min(a, b)))
+
 
     // Точка входа в программу
     public static void main(String[] args) {
