@@ -28,24 +28,6 @@ This project implements basic data structures in Java **without using `java.util
 - `MyMinHeap<T>` – binary min-heap for `Comparable<T>`
 - `MyList<T>` – common interface for custom list types
 
-## Project Structure
-src/
-│
-├── mylist/
-│ ├── MyList.java
-│ ├── MyArrayList.java
-│ └── MyLinkedList.java
-│
-├── structures/
-│ ├── MyStack.java
-│ ├── MyQueue.java
-│ └── MyMinHeap.java
-│
-└── tests/
-├── MyArrayListTest.java
-├── MyLinkedListTest.java
-└── MyMinHeapTest.java
-
 ##  Как запустить
 1. Открой проект в IntelliJ IDEA
 2. Запусти метод `main()` в `TaskSolutions.java`
