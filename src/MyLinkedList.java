@@ -29,8 +29,55 @@ public class MyLinkedList<T> implements MyList<T>, Iterable<T> {
     }
 
     @Override
-    public int size() {
-        return size;
+    public void add(int index, T item) {
+        checkIndexForAdd(index);
+
+        if (index == size) {
+            add(item);
+            return;
+        }
+
+        MyNode newNode = new MyNode(item);
+        if (index == 0) {
+            newNode.next = head;
+            head.prev = newNode;
+            head = newNode;
+        } else {
+            MyNode current = getNode(index);
+            MyNode previous = current.prev;
+
+            previous.next = newNode;
+            newNode.prev = previous;
+            newNode.next = current;
+            current.prev = newNode;
+        }
+        size++;
+    }
+
+    @Override
+    public T remove(int index) {
+        checkIndex(index);
+        MyNode removed;
+
+        if (index == 0) {
+            removed = head;
+            head = head.next;
+            if (head != null) head.prev = null;
+            if (size == 1) tail = null;
+        } else if (index == size - 1) {
+            removed = tail;
+            tail = tail.prev;
+            tail.next = null;
+        } else {
+            removed = getNode(index);
+            MyNode before = removed.prev;
+            MyNode after = removed.next;
+            before.next = after;
+            after.prev = before;
+        }
+
+        size--;
+        return removed.data;
     }
 
     @Override
@@ -59,14 +106,34 @@ public class MyLinkedList<T> implements MyList<T>, Iterable<T> {
             throw new IndexOutOfBoundsException("Invalid index: " + index);
     }
 
-    @Override
-    public Iterator<T> iterator() {
-        return null; // временно
+    private void checkIndexForAdd(int index) {
+        if (index < 0 || index > size)
+            throw new IndexOutOfBoundsException("Invalid index for add: " + index);
     }
 
     @Override
-    public void add(int index, T item) { } // временно
+    public int size() {
+        return size;
+    }
 
     @Override
-    public T remove(int index) { return null; } // временно
+    public Iterator<T> iterator() {
+        return new MyLinkedListIterator();
+    }
+
+    private class MyLinkedListIterator implements Iterator<T> {
+        private MyNode current = head;
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public T next() {
+            T val = current.data;
+            current = current.next;
+            return val;
+        }
+    }
 }
