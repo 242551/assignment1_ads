@@ -1,7 +1,6 @@
 import java.util.Iterator;
 
-public class MyArrayList<T> implements MyList<T> {
-
+public class MyArrayList<T> implements MyList<T>, Iterable<T> {
     private Object[] data;
     private int size;
     private static final int INITIAL_CAPACITY = 10;
@@ -19,49 +18,49 @@ public class MyArrayList<T> implements MyList<T> {
 
     @Override
     public void add(int index, T item) {
-        if (index < 0 || index > size)
-            throw new IndexOutOfBoundsException("Index " + index + " out of bounds.");
-
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Index: " + index);
+        }
         ensureCapacity();
-
-        // shift elements to the right
         for (int i = size; i > index; i--) {
             data[i] = data[i - 1];
         }
-
         data[index] = item;
         size++;
     }
 
     @Override
     public T get(int index) {
-        if (index < 0 || index >= size)
-            throw new IndexOutOfBoundsException("Index " + index + " out of bounds.");
-
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index);
+        }
         return (T) data[index];
     }
 
     @Override
     public T remove(int index) {
-        if (index < 0 || index >= size)
-            throw new IndexOutOfBoundsException("Index " + index + " out of bounds.");
-
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index);
+        }
         T removed = (T) data[index];
-
-        // shift elements to the left
         for (int i = index; i < size - 1; i++) {
             data[i] = data[i + 1];
         }
-
-        data[size - 1] = null;
-        size--;
-
+        data[--size] = null;
         return removed;
     }
 
     @Override
     public int size() {
         return size;
+    }
+
+    @Override
+    public void set(int index, T element) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index);
+        }
+        data[index] = element;
     }
 
     private void ensureCapacity() {
@@ -82,12 +81,15 @@ public class MyArrayList<T> implements MyList<T> {
     private class MyArrayListIterator implements Iterator<T> {
         private int currentIndex = 0;
 
+        @Override
         public boolean hasNext() {
             return currentIndex < size;
         }
 
+        @Override
         public T next() {
             return (T) data[currentIndex++];
         }
     }
 }
+
